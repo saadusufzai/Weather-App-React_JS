@@ -1,6 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploying Weather App 
+name: Deploying WeatherApp on surge
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -27,16 +28,18 @@ jobs:
       with:
         node-version: 12  
 
- 
+    # Runs a set of commands using the runners
+    - name: GitHub Action for Yarn
+      uses: borales/actions-yarn@v2.3.0
        
 # will run build
     
-    - name: NPM Build
-      run: npm run build
+    - name: Yarn Build
+      run: yarn build
     
     - name: installing Surge
       run: npm install -g surge
       
-      
+
     - name: deploying build to surge
       run: surge ./build http://weatherpp-techwa.surge.sh/ --token ${{secrets.SURGE_KEY}}
