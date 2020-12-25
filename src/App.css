@@ -1,3 +1,35 @@
-ul li{
-  list-style: none;
+.navbar{
+  background-color: #344152;
+  color:#fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  
+}
+
+ul{
+  display:flex;
+}
+li{
+  list-style-type: none;
+  margin-left: 1em;
+}
+
+footer{
+  background-color: #344152;
+  color: #fff;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+}
+
+.intro{
+  width: 30%;
+}
+
+a{
+  color: #fff;
+  text-decoration: none;
 }
