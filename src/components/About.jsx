@@ -1,10 +1,11 @@
 
-const Watchlist = () => {
+const About = () => {
     return (
         <div>
             About Component
+            
         </div>
     )
 }
 
-export default Watchlist
+export default About
