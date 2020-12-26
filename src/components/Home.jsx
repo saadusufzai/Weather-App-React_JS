@@ -1,49 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import MovieCard from "./MovieCard";
+import Footer from "./Footer";
+import Pager from "./Pager";
 const Home = () => {
+  const [list, setList] = useState();
+  let [page, setPage] = useState(1);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=531c8779023f70f5ec45da60cc337e58&language=en-US&page=${page}`
+      )
+      .then(({ data }) => setList(data.results))
+      .catch((err) => console.log(err));
+  }, [page]);
+
   return (
-    <div>
-      <section>
-        <div className="text">
-          <h1>Heading 1</h1>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            reiciendis alias beatae repudiandae natus et molestiae quae,
-            expedita recusandae ipsa, esse facilis dolor delectus rerum
-            voluptates unde nam mollitia ratione.
-          </p>
+    <>
+      <Pager page={page} setPage={setPage} />
+      <div className="container">
+        <div className="grid">
+          {list && list.map((movie) => <MovieCard list={movie} />)}
         </div>
-        <div className="text">
-          <h1>Heading 2</h1>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            reiciendis alias beatae repudiandae natus et molestiae quae,
-            expedita recusandae ipsa, esse facilis dolor delectus rerum
-            voluptates unde nam mollitia ratione.
-          </p>
-        </div>
-        <div className="text">
-          <h1>Heading 3</h1>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            reiciendis alias beatae repudiandae natus et molestiae quae,
-            expedita recusandae ipsa, esse facilis dolor delectus rerum
-            voluptates unde nam mollitia ratione.
-          </p>
-        </div>
-      </section>
-      <footer>
-        <div className="intro">
-          Copyrights Movies &copy; 2020 | All rights are reserved
-        </div>
-        <div className="icons">
-          <div className="fb">Facebook</div>
-          <div className="fb">Insta</div>
-          <div className="fb">Youtube</div>
-        </div>
-      </footer>
-    </div>
+      </div>
+      <Pager page={page} setPage={setPage} />
+      <Footer />
+    </>
   );
 };
 
